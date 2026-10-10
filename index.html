@@ -1,9 +1,394 @@
+
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-    <title>My Website</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Srija's Notebook</title>
+    <meta name="description" content="Srija's personal notebook documenting learnings and technical notes">
+
+    <style>
+        :root {
+            --bg: #faf9f6;
+            --surface: #ffffff;
+            --text: #242424;
+            --muted: #737373;
+            --accent: #526b54;
+            --border: #e8e6df;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont,
+                         "Segoe UI", sans-serif;
+            background: var(--bg);
+            color: var(--text);
+            line-height: 1.7;
+        }
+
+        a {
+            color: inherit;
+            text-decoration: none;
+        }
+
+        .container {
+            width: min(100% - 40px, 900px);
+            margin: auto;
+        }
+
+        /* Navigation */
+
+        nav {
+            border-bottom: 1px solid var(--border);
+        }
+
+        .nav-content {
+            min-height: 70px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 20px;
+        }
+
+        .logo {
+            font-size: 19px;
+            font-weight: 700;
+            letter-spacing: -0.5px;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 24px;
+            color: var(--muted);
+            font-size: 14px;
+        }
+
+        .nav-links a:hover {
+            color: var(--accent);
+        }
+
+        /* Introduction */
+
+        .hero {
+            padding: 90px 0 65px;
+        }
+
+        .eyebrow {
+            color: var(--accent);
+            font-size: 12px;
+            font-weight: 700;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            margin-bottom: 20px;
+        }
+
+        h1 {
+            font-size: clamp(42px, 7vw, 64px);
+            line-height: 1.15;
+            letter-spacing: -2px;
+            font-weight: 650;
+        }
+
+        h1 span {
+            color: var(--accent);
+        }
+
+        .intro {
+            max-width: 620px;
+            margin-top: 22px;
+            color: var(--muted);
+            font-size: 16px;
+        }
+
+        .button {
+            display: inline-block;
+            margin-top: 25px;
+            background: var(--accent);
+            color: white;
+            padding: 10px 17px;
+            border-radius: 6px;
+            font-size: 14px;
+            font-weight: 600;
+        }
+
+        .button:hover {
+            opacity: 0.88;
+        }
+
+        /* Sections */
+
+        section {
+            padding: 35px 0;
+        }
+
+        .section-heading {
+            display: flex;
+            justify-content: space-between;
+            align-items: baseline;
+            gap: 15px;
+            margin-bottom: 22px;
+        }
+
+        h2 {
+            font-size: 24px;
+            letter-spacing: -0.6px;
+        }
+
+        .section-note {
+            font-size: 13px;
+            color: var(--muted);
+        }
+
+        /* Topics */
+
+        .topic-grid {
+            display: grid;
+            grid-template-columns: repeat(2, minmax(0, 1fr));
+            gap: 14px;
+        }
+
+        .topic {
+            padding: 22px;
+            border: 1px solid var(--border);
+            border-radius: 8px;
+            background: var(--surface);
+        }
+
+        .topic h3 {
+            font-size: 17px;
+            margin-bottom: 7px;
+        }
+
+        .topic p {
+            font-size: 14px;
+            color: var(--muted);
+        }
+
+        /* Notebook entries */
+
+        .notebook-list {
+            border-top: 1px solid var(--border);
+        }
+
+        .notebook-entry {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            gap: 20px;
+            padding: 23px 0;
+            border-bottom: 1px solid var(--border);
+        }
+
+        .notebook-entry h3 {
+            font-size: 17px;
+            font-weight: 600;
+            margin-bottom: 5px;
+        }
+
+        .notebook-entry p {
+            font-size: 14px;
+            color: var(--muted);
+        }
+
+        .tag {
+            display: inline-block;
+            margin-top: 9px;
+            font-size: 11px;
+            color: var(--accent);
+            background: #edf0e9;
+            padding: 3px 9px;
+            border-radius: 20px;
+        }
+
+        .arrow {
+            color: var(--accent);
+            font-size: 22px;
+            flex-shrink: 0;
+        }
+
+        /* About */
+
+        .about p {
+            margin-top: 12px;
+            color: var(--muted);
+            font-size: 15px;
+            max-width: 720px;
+        }
+
+        /* Footer */
+
+        footer {
+            margin-top: 40px;
+            border-top: 1px solid var(--border);
+            padding: 24px 0;
+            color: var(--muted);
+            font-size: 13px;
+        }
+
+        .footer-content {
+            display: flex;
+            justify-content: space-between;
+            flex-wrap: wrap;
+            gap: 10px;
+        }
+
+        @media (max-width: 600px) {
+            .nav-content {
+                min-height: 65px;
+            }
+
+            .nav-links {
+                gap: 14px;
+                font-size: 13px;
+            }
+
+            .hero {
+                padding: 65px 0 45px;
+            }
+
+            h1 {
+                letter-spacing: -1.5px;
+            }
+
+            .topic-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .section-heading {
+                align-items: flex-start;
+                flex-direction: column;
+            }
+        }
+    </style>
 </head>
+
 <body>
-    <h1>Hello, World! Welcome to my GitHub Pages website, I will be maintaining Blogs here.</h1>
+
+    <!-- Navigation -->
+    <nav>
+        <div class="container nav-content">
+            <a href="#" class="logo">Srija's Notebook.</a>
+
+            <div class="nav-links">
+                <a href="#notes">Explore</a>
+                <a href="#notes">Notes</a>
+                <a href="#about">About</a>
+                <a href="https://github.com/srijamuvva3"
+                   target="_blank"
+                   rel="noopener noreferrer">GitHub ↗</a>
+            </div>
+        </div>
+    </nav>
+
+    <main>
+
+        <!-- Introduction -->
+        <header class="container hero">
+            <p class="eyebrow">A personal learning notebook</p>
+
+            <h1>
+                Learning something new.
+                <span>One note at a time.</span>
+            </h1>
+
+            <a href="#notes" class="button">Explore my notes ↓</a>
+        </header>
+
+        <!-- Topics -->
+        <section class="container" id="explore">
+            <div class="section-heading">
+                <h2>Topics I Explore</h2>
+            </div>
+
+            <div class="topic-grid">
+
+                <article class="topic">
+                    <h3>GPU & Computer Architecture</h3>
+                </article>
+                <article class="topic">
+                    <h3>GPU Kernels tracing to low level Assembly</h3>
+                </article>
+                <article class="topic">
+                    <h3>Processor Modeling</h3>
+                </article>
+                <article class="topic">
+                    <h3>Silicon Validation</h3>
+                </article>
+            </div>
+        </section>
+
+        <!-- Notes -->
+        <section class="container" id="notes">
+            <div class="section-heading">
+                <h2>Notebook Entries</h2>
+                <p class="section-note">Notes, experiments & discoveries</p>
+            </div>
+
+            <div class="notebook-list">
+
+                <article class="notebook-entry">
+                    <div>
+                        <h3>My Learning Journey Starts Here</h3>
+                        <p>
+                            A short introduction to this notebook and
+                            what I plan to document along the way.
+                        </p>
+                        <span class="tag">Getting Started</span>
+                    </div>
+
+                    <a class="arrow"
+                       href="blogs/first-post.html"
+                       aria-label="Read the introduction">↗</a>
+                </article>
+
+                <!-- Add new notebook entries here -->
+
+            </div>
+        </section>
+
+        <!-- About -->
+        <section class="container" id="about">
+            <div class="about">
+                <h2>About</h2>
+
+                <p>
+                    I'm Srija, an engineer interested in understanding
+                    technology beyond the surface. Srija's Notebook is
+                    my space to keep track of my learnings.
+                </p>
+
+                <p>
+                    Some entries may be detailed technical explanations;
+                    others may be short notes, experiments, debugging
+                    lessons, or questions I'm still figuring out.
+                </p>
+            </div>
+        </section>
+
+    </main>
+
+    <!-- Footer -->
+    <footer>
+        <div class="container footer-content">
+            <span>© <span id="year"></span> Srija's Notebook</span>
+            <span>Always learning...</span>
+        </div>
+    </footer>
+
+    <script>
+        document.getElementById("year").textContent =
+            new Date().getFullYear();
+    </script>
+
 </body>
 </html>
